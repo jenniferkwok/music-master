@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
-import './App.css'
+import './App.css';
+import { FormGroup, FormControl, InputGroup };
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      query:''
+    }
+  }
+
+search(){
+  console.log('this.state', this.state);
+}
+
   render(){
     return(
       <div className="app">
         <div className="app-title">Music Master</div>
-        <div>
-          <input placeholder="search an artist..." />
-          <button>search</button>
-        </div>
+        <FormGroup>
+        <InputGroup>
+          <FormControl
+          placeholder="search an artist..."
+          value={this.state.query}
+          onChange={event=>{this.setState({query:event.target.value})}}
+          onKeyPress={event=>console.log('event.key', event.key)} />
+          <button onClick={()=>this.search()}>search</button>
+          </InputGroup>
+        </FormGroup>
         <div className="profile">
           <div>artist picture</div>
           <div>artist name</div>
