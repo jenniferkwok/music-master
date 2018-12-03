@@ -24,7 +24,15 @@ search(){
           placeholder="search an artist..."
           value={this.state.query}
           onChange={event=>{this.setState({query:event.target.value})}}
-          onKeyPress={event=>console.log('event.key', event.key)} />
+          onKeyPress={
+            // event=>console.log('event.key', event.key)
+            event=>{
+              if(event.key==='Enter'){
+                this.search()
+              }
+            }
+          }
+            />
           <button onClick={()=>this.search()}>search</button>
           </InputGroup>
         </FormGroup>
