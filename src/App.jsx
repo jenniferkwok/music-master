@@ -33,7 +33,10 @@ search(){
             }
           }
             />
-          <button onClick={()=>this.search()}>search</button>
+            <InputGroup.Addon onClick={()=>this.search()}>
+            <Glyphicon glyph="search"></Glyphicon>
+
+          </InputGroup.Addon>
           </InputGroup>
         </FormGroup>
         <div className="profile">
