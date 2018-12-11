@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import { FormGroup, FormControl, InputGroup, Glyphicon } from 'react-bootstrap';
+import Profile from './Profile';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      query:''
+      query:'',
+      artist: null
     }
   }
 
@@ -20,11 +22,16 @@ search(){
   fetch(FETCH_URL, {
     method: 'GET',
     headers: {
-      'Authorization': 'Bearer BQBmttbw-OPmfbvmXR-j0Dr-i6hgVwJQftGyOtuqZsyFprPfynGVH14kpo_pD9_yi3cVf_ZG2VbRvnvsOOZiImdVNePal_Wj3gebtBdtjXVsAinzJTUcDjPn29m2TwCUX2bATRsPxhs9in5krS3BnngZVSxYMfyHpaMYPqhx'
+      'Authorization': 'Bearer BQBzH4VxODCRc5i7qWMBZMtkCh30EPiJ_-xzPzdd-I6bkxj0t4rEz_JP-ba2ny1jYB8itx1orerQyvJOa_jgAY3qafHDAR3dfJvaGKuUVZt2Y4C4bJiweN9_ZcTx_b5Z1J5GLDQGRgQ29LANfTX6Xs1yOl10tYJ8dhoBxu_5'
     }
   })
   .then(response => response.json())
-  .then(json => console.log('json', json));
+  .then(json => {
+    console.log('json', json)
+    const artist = json.artists.items[0];
+    console.log('artist', artist);
+  }
+  );
 }
 
   render(){
@@ -34,11 +41,11 @@ search(){
         <FormGroup>
         <InputGroup>
           <FormControl
+          type="text"
           placeholder="search an artist..."
           value={this.state.query}
           onChange={event=>{this.setState({query:event.target.value})}}
           onKeyPress={
-            // event=>console.log('event.key', event.key)
             event=>{
               if(event.key==='Enter'){
                 this.search()
@@ -52,10 +59,8 @@ search(){
           </InputGroup.Addon>
           </InputGroup>
         </FormGroup>
-        <div className="profile">
-          <div>artist picture</div>
-          <div>artist name</div>
-        </div>
+
+        <Profile artist={this.state.artist}/>
         <div className="gallery">
         gallery
         </div>
